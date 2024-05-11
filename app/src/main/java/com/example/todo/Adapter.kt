@@ -6,24 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.view.view.*
+import com.example.todo.databinding.ViewBinding
 
 
-class Adapter(var data:List<CardInfo>) : RecyclerView.Adapter<Adapter.viewHolder>() {
-    class viewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        var title = itemView.title
-        var priority = itemView.priority
-        var layout = itemView.mylayout
+class Adapter(var data:List<CardInfo>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+    class ViewHolder(private val binding: ViewBinding):RecyclerView.ViewHolder(binding.root){
+        var title = binding.title
+        var priority = binding.priority
+        var layout = binding.mylayout
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-       var itemView = LayoutInflater.from(parent.context).
-             inflate(R.layout.view,parent,false)
-       return viewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val binding = ViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: viewHolder, position: Int){
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
         when(data[position].priority.toLowerCase())
         {
             "high" ->holder.layout.setBackgroundColor(Color.parseColor("#F05454"))

@@ -4,25 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.todo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        var binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        add.setOnClickListener{
+        binding.add.setOnClickListener{
             val intent = Intent(this,CreateCard::class.java)
             startActivity(intent)
+        }
+
+
+        binding.deleteAll.setOnClickListener {
+        DataObject.deleteAll()
 
         }
 
-        deleteAll.setOnClickListener {
-            DataObject.deleteAll()
-
-        }
-
-        recycler_view.adapter = Adapter(DataObject.getAllData())
-        recycler_view.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = Adapter(DataObject.getAllData())
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }
