@@ -21,8 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UpdateCard"/>
-        <activity android:name=".CreateCard"/>
+        <activity
+            android:name=".UpdateCard"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity
+            android:name=".CreateCard"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".MainActivity"/>
 
     </application>

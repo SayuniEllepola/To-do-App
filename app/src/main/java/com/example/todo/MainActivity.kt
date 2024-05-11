@@ -8,11 +8,11 @@ import com.example.todo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-
+     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.add.setOnClickListener{
@@ -22,11 +22,18 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.deleteAll.setOnClickListener {
-        DataObject.deleteAll()
-
+            DataObject.deleteAll()
+            setRecycler()
         }
 
+        setRecycler()
+
+    }
+
+     fun setRecycler(){
+
         binding.recyclerView.adapter = Adapter(DataObject.getAllData())
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }

@@ -2,6 +2,7 @@ package com.example.todo
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todo.databinding.ActivityUpdateCardBinding
 
@@ -27,7 +28,15 @@ class UpdateCard :AppCompatActivity() {
             }
 
             binding.updateButton.setOnClickListener {
-                DataObject.updateData(pos,title, priority)
+                val updatedTitle = binding.createTitle.text.toString()
+                val updatedPriority = binding.createPriority.text.toString()
+
+                DataObject.updateData(
+                    pos,
+                    updatedTitle,
+                    updatedPriority
+                )
+                Toast.makeText(this,title+" "+priority,Toast.LENGTH_LONG).show()
                 myIntent()
             }
 
