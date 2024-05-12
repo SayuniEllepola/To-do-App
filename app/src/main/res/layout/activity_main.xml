@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_margin="8dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -25,12 +26,13 @@
 
         <Button
             android:id="@+id/deleteAll"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="#FF5722"
             android:text="X"
-            android:textAllCaps="false"
+            android:textAllCaps="true"
+            android:textSize="15sp"
             android:textColor="@color/black"/>
     </LinearLayout>     
     

@@ -3,7 +3,6 @@ package com.example.todo
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.databinding.ViewBinding
@@ -26,9 +25,9 @@ class Adapter(var data:List<CardInfo>) : RecyclerView.Adapter<Adapter.ViewHolder
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         when(data[position].priority.toLowerCase())
         {
-            "high" ->holder.layout.setBackgroundColor(Color.parseColor("#F05454"))
-            "medium" ->holder.layout.setBackgroundColor(Color.parseColor("#EDC988"))
-            else-> holder.layout.setBackgroundColor(Color.parseColor("#F05454"))
+            "high" ->holder.layout.setBackgroundColor(Color.parseColor("#F62217"))
+            "medium" ->holder.layout.setBackgroundColor(Color.parseColor("#FDBD01"))
+            else-> holder.layout.setBackgroundColor(Color.parseColor("#41A317"))
         }
 
 

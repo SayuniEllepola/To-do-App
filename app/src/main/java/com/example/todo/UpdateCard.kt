@@ -2,16 +2,26 @@ package com.example.todo
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.example.todo.databinding.ActivityUpdateCardBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class UpdateCard :AppCompatActivity() {
+    private lateinit var database: MyDatabase
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var binding = ActivityUpdateCardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        database = Room.databaseBuilder(
+            applicationContext,MyDatabase::class.java,"To_Do"
+        ).build()
+
 
         val pos = intent.getIntExtra("id",-1)
         if(pos!=-1){
@@ -23,7 +33,18 @@ class UpdateCard :AppCompatActivity() {
             binding.createPriority.setText(priority)
 
             binding.deleteButton.setOnClickListener {
+                val updatedTitle = binding.createTitle.text.toString()
+                val updatedPriority = binding.createPriority.text.toString()
+
                 DataObject.deleteData(pos)
+
+                GlobalScope.launch{
+                    database.dao().deleteTask(
+                        Entity(pos+1,updatedTitle,
+                            updatedPriority)
+                    )
+
+                }
                 myIntent()
             }
 
@@ -36,7 +57,17 @@ class UpdateCard :AppCompatActivity() {
                     updatedTitle,
                     updatedPriority
                 )
-                Toast.makeText(this,title+" "+priority,Toast.LENGTH_LONG).show()
+
+                GlobalScope.launch{
+                    database.dao().updateTask(
+                        Entity(
+                            pos+1,updatedTitle,
+                            updatedPriority
+                        )
+                    )
+
+                }
+
                 myIntent()
             }
 
